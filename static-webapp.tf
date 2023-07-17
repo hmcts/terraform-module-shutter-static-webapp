@@ -23,3 +23,7 @@ resource "azurerm_static_site_custom_domain" "custom_domain" {
   domain_name     = each.value.custom_domain
   validation_type = "cname-delegation"
 }
+
+output "shutter_apps" {
+  value = var.shutter_apps
+}
