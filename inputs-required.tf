@@ -24,7 +24,7 @@ variable "expiresAfter" {
 variable "project" {
   description = "The name of the project."
 }
-variable "tag" {
+variable "tags" {
   description = "Enter the tags."
 
 }
@@ -33,5 +33,5 @@ variable "shutter_apps" {
 }
 variable "dns_zone_resource_group_name" {
   description = "Resource group name for DNS zone"
-  default     = "dns_zone_resource_group_name"
+  default     = "reformMgmtRG"
 }
