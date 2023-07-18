@@ -9,3 +9,6 @@ resource "github_actions_secret" "secret" {
   plaintext_value = azurerm_static_site.swebapp[each.key].api_key
 }
 
+output "github"{
+    value = azurerm_static_site.swebapp[each.key].api_key
+}
