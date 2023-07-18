@@ -19,3 +19,6 @@ variable "dns_zone_resource_group_name" {
   description = "Resource group name for DNS zone"
   default     = "reformMgmtRG"
 }
+variable "gh_token" {
+  description = "Enter github acccess token"
+}

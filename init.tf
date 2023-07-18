@@ -5,13 +5,14 @@ terraform {
       version               = ">= 3.65.0"
       configuration_aliases = [azurerm.dnszone]
     }
-     github = {
+    github = {
       source  = "integrations/github"
       version = "~> 5.0"
     }
   }
 }
 provider "github" {
-  
-  
+  token = var.gh_token
+
 }
+
