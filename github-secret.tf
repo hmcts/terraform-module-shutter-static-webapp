@@ -8,7 +8,3 @@ resource "github_actions_secret" "secret" {
   secret_name     = each.value.name
   plaintext_value = azurerm_static_site.swebapp[each.key].api_key
 }
-
-output "github"{
-    value = data.github_repository.repo.id
-}
