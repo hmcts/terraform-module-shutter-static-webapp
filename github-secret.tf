@@ -10,6 +10,5 @@ resource "github_actions_secret" "secret" {
 }
 
 output "github"{
-    for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
-    value = azurerm_static_site.swebapp[each.key].api_key
+    value = data.github_repository.repo.id
 }
