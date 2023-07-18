@@ -17,12 +17,12 @@ resource "azurerm_dns_cname_record" "cname_record" {
   record              = azurerm_static_site.swebapp[each.key].default_host_name
 }
 
-resource "azurerm_static_site_custom_domain" "custom_domain" {
+/* resource "azurerm_static_site_custom_domain" "custom_domain" {
   for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
   static_site_id  = azurerm_static_site.swebapp[each.key].id
   domain_name     = each.value.custom_domain
   validation_type = "cname-delegation"
-}
+} */
 
 output "shutter_apps" {
   value = var.shutter_apps
