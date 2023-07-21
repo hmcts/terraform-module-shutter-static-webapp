@@ -4,8 +4,9 @@ Shutter Static web app
 ### Architecture Diagram
 ![Architecture](shutter_architecture_diagram.drawio.png)
 
-### prerequisite 
-    - Needs a [dns-zone-name](https://github.com/hmcts/azure-platform-terraform/blob/bad0b5732456e887cac8e53b78bf0856586e27d9/environments/sbox/sbox.tfvars#L575C1-L575C1) entry for every application.
+### Prerequisite 
+  Needs a [dns-zone-name](https://github.com/hmcts/azure-platform-terraform/blob/bad0b5732456e887cac8e53b78bf0856586e27d9/environments/sbox/sbox.tfvars#L575C1-L575C1) entry for every application.
+
 ### Following resources are delopyed
     1) Azure static webapp
     2) CNAME Record `<appname>-shutter` pointing to static webapp url
