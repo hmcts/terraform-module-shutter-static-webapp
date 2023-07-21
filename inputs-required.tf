@@ -1,15 +1,15 @@
 variable "resource_group_name" {
-  description = "Enter name of Azure resource group"
+  description = "Azure resource group"
   type        = string
 
 }
 variable "location" {
-  description = "Enter Azure location."
+  description = "Azure location."
   default     = "West Europe"
 
 }
 variable "tags" {
-  description = "Enter the tags."
+  description = "Azure tags."
 
 }
 variable "shutter_apps" {
@@ -20,5 +20,5 @@ variable "dns_zone_resource_group_name" {
   default     = "reformMgmtRG"
 }
 variable "gh_token" {
-  description = "Enter github acccess token"
+  description = "github access token"
 }

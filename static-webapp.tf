@@ -22,7 +22,8 @@ resource "azurerm_dns_txt_record" "zone_validate" {
   resource_group_name = var.dns_zone_resource_group_name
   ttl                 = 300
   record {
-    value = azurerm_static_site_custom_domain.custom_domain[each.key].validation_token
+    # ISSUE: https://github.com/hashicorp/terraform-provider-azurerm/issues/14750
+    value = azurerm_static_site_custom_domain.custom_domain[each.key].validation_token == "" ? "validated" : azurerm_static_site_custom_domain.custom_domain[each.key].validation_token
   }
 }
 
