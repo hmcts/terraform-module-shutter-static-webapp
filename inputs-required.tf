@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  description = "Azure resource group"
+  description = "Azure resource group."
   type        = string
 
 }
@@ -16,9 +16,12 @@ variable "shutter_apps" {
   default = []
 }
 variable "dns_zone_resource_group_name" {
-  description = "Resource group name for DNS zone"
+  description = "Resource group name for DNS zone."
   default     = "reformMgmtRG"
 }
 variable "gh_token" {
-  description = "github access token"
+  description = "github access token."
+}
+variable "env" {
+  description = "Environment value."
 }
