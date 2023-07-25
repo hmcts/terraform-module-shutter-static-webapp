@@ -8,7 +8,7 @@ Shutter Static web app
 ### Resources
 
     1) Azure static webapp
-    2) CNAME Record `<appname>-shutter` pointing to static webapp url
+    2) CNAME Record `<appname>-shutter` pointing to static webapp url for subdomains only.
     3) Add a TXT record to verify the domain. 
     4) Creates a GitHub secret `<appname>_<env>` in the azure-shutter-pages GitHub repository. `-` in <appname> are replaced with an `_`.
     5) Adds custom domain to webapp
