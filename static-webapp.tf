@@ -34,5 +34,5 @@ resource "azurerm_dns_cname_record" "cname_record" {
   zone_name           = each.value.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
   ttl                 = 300
-  record              = azurerm_static_site.swebapp[each.key].default_host_nam"
+  record              = azurerm_static_site.swebapp[each.key].default_host_name
 }
