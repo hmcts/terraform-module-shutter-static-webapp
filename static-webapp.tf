@@ -11,13 +11,13 @@ resource "azurerm_static_site_custom_domain" "custom_domain" {
   for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
   static_site_id  = azurerm_static_site.swebapp[each.key].id
   domain_name     = each.value.custom_domain
-  validation_type = "dns-txt-token"
+  validation_type = each.value.custom_domain == each.value.dns_zone_name ? "cname-delegation" : "dns-txt-token"
 }
 
 resource "azurerm_dns_txt_record" "zone_validate" {
-  for_each            = { for frontend in var.shutter_apps : frontend.name => frontend }
+  for_each            = { for frontend in var.shutter_apps : frontend.name => frontend if frontend.custom_domain != frontend.dns_zone_name }
   provider            = azurerm.dnszone
-  name                = each.value.custom_domain == each.value.dns_zone_name ? "@" : join(".", ["_dnsauth", trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), ".")])
+  name                = join(".", ["_dnsauth", trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), ".")])
   zone_name           = each.value.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
   ttl                 = 300
@@ -28,9 +28,9 @@ resource "azurerm_dns_txt_record" "zone_validate" {
 }
 
 resource "azurerm_dns_cname_record" "cname_record" {
-  for_each            = { for frontend in var.shutter_apps : frontend.name => frontend if frontend.custom_domain != frontend.dns_zone_name }
+  for_each            = { for frontend in var.shutter_apps : frontend.name => frontend }
   provider            = azurerm.dnszone
-  name                = join("-", [trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), "."), "shutter"])
+  name                = each.value.custom_domain != each.value.dns_zone_name ? join("-", [trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), "."), "shutter"]) :  join("-", [azurerm_static_site.swebapp[each.key].name, "shutter"])
   zone_name           = each.value.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
   ttl                 = 300
