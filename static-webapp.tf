@@ -30,9 +30,9 @@ resource "azurerm_static_site_custom_domain" "custom_domain" {
 resource "azurerm_dns_cname_record" "cname_record" {
   for_each            = { for frontend in var.shutter_apps : frontend.name => frontend }
   provider            = azurerm.dnszone
-  name                = each.value.custom_domain != each.value.dns_zone_name ? join("-", [trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), "."), "shutter"]) :  "shutter"
+  name                = each.value.custom_domain != each.value.dns_zone_name ? join("-", [trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), "."), "shutter"]) :  join("-", [azurerm_static_site.swebapp[each.key].name, "shutter"])
   zone_name           = each.value.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
   ttl                 = 300
-  record              = azurerm_static_site.swebapp[each.key].default_host_name
+  record              = azurerm_static_site.swebapp[each.key].default_host_nam"
 }
