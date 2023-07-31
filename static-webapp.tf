@@ -15,7 +15,7 @@ resource "azurerm_static_site_custom_domain" "custom_domain" {
 }
 
 resource "azurerm_dns_txt_record" "zone_validate" {
-  for_each            = { for frontend in var.shutter_apps : frontend.name => frontend if fronend.custom_domain != frontend.dns_zone_name }
+  for_each            = { for frontend in var.shutter_apps : frontend.name => frontend if frontend.custom_domain != frontend.dns_zone_name }
   provider            = azurerm.dnszone
   name                = join(".", ["_dnsauth", trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), ".")])
   zone_name           = each.value.dns_zone_name
