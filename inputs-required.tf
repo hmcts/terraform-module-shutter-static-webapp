@@ -26,6 +26,6 @@ variable "env" {
   description = "Environment value."
 }
 variable "sku_tier" {
-  default = "Standard"
+  default = "Free"
   description = "SKU tier of the Static Web App"
 }
