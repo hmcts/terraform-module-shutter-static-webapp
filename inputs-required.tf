@@ -25,3 +25,7 @@ variable "gh_token" {
 variable "env" {
   description = "Environment value."
 }
+variable "sku_tier" {
+  default = "Free"
+  description = "SKU tier of the Static Web App"
+}
