@@ -5,6 +5,7 @@ resource "azurerm_static_site" "swebapp" {
   resource_group_name = var.resource_group_name
   location            = var.location
   tags                = var.tags
+  sku_tier            = var.sku_tier
 }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
