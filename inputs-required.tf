@@ -29,3 +29,7 @@ variable "sku_tier" {
   default = "Free"
   description = "SKU tier of the Static Web App"
 }
+variable "sku_size" {
+  default = "Free"
+  description = "SKU size of the Static Web App"
+}
