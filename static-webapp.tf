@@ -6,6 +6,7 @@ resource "azurerm_static_site" "swebapp" {
   location            = var.location
   tags                = var.tags
   sku_tier            = var.sku_tier
+  sku_size            = var.sku_size
 }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
