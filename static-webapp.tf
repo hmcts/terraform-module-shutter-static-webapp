@@ -7,6 +7,10 @@ resource "azurerm_static_site" "swebapp" {
   tags                = var.tags
   sku_tier            = var.sku_tier
   sku_size            = var.sku_size
+
+  timeouts = {
+    read = "15m"
+  }
 }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
