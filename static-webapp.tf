@@ -8,7 +8,7 @@ resource "azurerm_static_site" "swebapp" {
   sku_tier            = var.sku_tier
   sku_size            = var.sku_size
 
-  timeouts = {
+  timeouts {
     read = "15m"
   }
 }
