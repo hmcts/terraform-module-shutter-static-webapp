@@ -1,4 +1,11 @@
 
+resource "null_resource" "delay" {
+  count = length(var.shutter_apps)
+
+  provisioner "local-exec" {
+    command = "sleep 10"
+  }
+}
 resource "azurerm_static_site" "swebapp" {
   for_each            = { for frontend in var.shutter_apps : frontend.name => frontend }
   name                = each.value.name
@@ -11,13 +18,14 @@ resource "azurerm_static_site" "swebapp" {
   timeouts {
     read = "15m"
   }
+  depends_on = [null_resource.delay[count.index]]
 }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
   for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
   static_site_id  = azurerm_static_site.swebapp[each.key].id
   domain_name     = each.value.custom_domain
-  validation_type =  "dns-txt-token"
+  validation_type = "dns-txt-token"
 }
 
 resource "azurerm_dns_txt_record" "zone_validate" {
@@ -36,7 +44,7 @@ resource "azurerm_dns_txt_record" "zone_validate" {
 resource "azurerm_dns_cname_record" "cname_record" {
   for_each            = { for frontend in var.shutter_apps : frontend.name => frontend }
   provider            = azurerm.dnszone
-  name                = each.value.custom_domain != each.value.dns_zone_name ? join("-", [trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), "."), "shutter"]) :  join("-", [azurerm_static_site.swebapp[each.key].name, "shutter"])
+  name                = each.value.custom_domain != each.value.dns_zone_name ? join("-", [trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), "."), "shutter"]) : join("-", [azurerm_static_site.swebapp[each.key].name, "shutter"])
   zone_name           = each.value.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
   ttl                 = 300
