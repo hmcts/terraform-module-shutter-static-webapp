@@ -1,11 +1,5 @@
 
-resource "null_resource" "delay" {
-  count = length(var.shutter_apps)
 
-  provisioner "local-exec" {
-    command = "sleep 10"
-  }
-}
 resource "azurerm_static_site" "swebapp" {
   for_each            = { for frontend in var.shutter_apps : frontend.name => frontend }
   name                = each.value.name
@@ -18,7 +12,6 @@ resource "azurerm_static_site" "swebapp" {
   timeouts {
     read = "15m"
   }
-  depends_on = [null_resource.delay[count.index]]
 }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
