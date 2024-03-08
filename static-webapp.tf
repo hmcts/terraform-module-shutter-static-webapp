@@ -13,7 +13,7 @@ resource "azurerm_static_site_custom_domain" "custom_domain" {
   for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
   static_site_id  = azurerm_static_site.swebapp[each.key].id
   domain_name     = each.value.custom_domain
-  validation_type =  "dns-txt-token"
+  validation_type = each.value.custom_domain == each.value.dns_zone_name ? "cname-delegation" : "dns-txt-token"
 }
 
 resource "azurerm_dns_txt_record" "zone_validate" {
