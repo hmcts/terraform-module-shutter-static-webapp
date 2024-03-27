@@ -22,7 +22,7 @@ resource "azurerm_dns_txt_record" "zone_validate" {
   name                = each.value.custom_domain == each.value.dns_zone_name ? "_dnsauth" : join(".", ["_dnsauth", trimsuffix(trimsuffix(each.value.custom_domain, each.value.dns_zone_name), ".")])
   zone_name           = each.value.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
-  ttl                 = 300
+  ttl                 = 3600
   record {
     # ISSUE: https://github.com/hashicorp/terraform-provider-azurerm/issues/14750
     value = azurerm_static_site_custom_domain.custom_domain[each.key].validation_token == "" ? "validated" : azurerm_static_site_custom_domain.custom_domain[each.key].validation_token
