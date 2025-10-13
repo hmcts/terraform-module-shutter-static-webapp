@@ -7,7 +7,13 @@ resource "azurerm_static_site" "swebapp" {
   tags                = var.tags
   sku_tier            = var.sku_tier
   sku_size            = var.sku_size
-}
+  # Add timeout configuration
+  timeouts {
+    create = "60m"
+    read   = "60m"
+    update = "60m"
+    delete = "60m"
+  }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
   for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
