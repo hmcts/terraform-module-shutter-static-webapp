@@ -9,13 +9,19 @@ resource "azurerm_static_site" "swebapp" {
   sku_size            = var.sku_size
   
   timeouts {
-    read = "10m"
-    create = "30m"
-    update = "30m"
-    delete = "10m"
+    create = "60m"
+    read   = "30m"
+    update = "60m"
+    delete = "30m"
   }
 
+  lifecycle {
+    ignore_changes = [
+      # Ignore app settings as they might be managed separately
+      app_settings
+    ]
   }
+}
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
   for_each        = { for frontend in var.shutter_apps : frontend.name => frontend }
