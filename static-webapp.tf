@@ -10,7 +10,7 @@ resource "azurerm_static_site" "swebapp" {
   
   timeouts {
     create = "60m"
-    read   = "30m"
+    read   = "60m"
     update = "60m"
     delete = "30m"
   }
