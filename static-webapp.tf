@@ -7,6 +7,20 @@ resource "azurerm_static_site" "swebapp" {
   tags                = var.tags
   sku_tier            = var.sku_tier
   sku_size            = var.sku_size
+  
+  timeouts {
+    create = "60m"
+    read   = "60m"
+    update = "60m"
+    delete = "30m"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore app settings as they might be managed separately
+      app_settings
+    ]
+  }
 }
 
 resource "azurerm_static_site_custom_domain" "custom_domain" {
