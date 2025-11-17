@@ -8,11 +8,12 @@ terraform {
       configuration_aliases = [azurerm.dnszone]
     }
     github = {
-      source  = "hashicorp/github"
-      version = ">=6.8.2"
+      source  = "integrations/github"
+      version = ">= 6.4.0"
     }
   }
 }
+
 provider "github" {
   token = var.gh_token
   owner = "hmcts"
