@@ -9,11 +9,10 @@ terraform {
     }
     github = {
       source  = "hashicorp/github"
-      version = ">= 6.4.0"
+      version = ">=6.3.0"
     }
   }
 }
-
 provider "github" {
   token = var.gh_token
   owner = "hmcts"
