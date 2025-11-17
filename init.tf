@@ -13,9 +13,17 @@ terraform {
     }
   }
 }
+
+provider "azurerm" {
+  features {}
+}
+
+provider "azurerm" {
+  alias    = "dnszone"
+  features {}
+}
+
 provider "github" {
   token = var.gh_token
   owner = "hmcts"
-
 }
-
