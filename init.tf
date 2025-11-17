@@ -7,13 +7,15 @@ terraform {
       version               = ">= 3.65.0"
       configuration_aliases = [azurerm.dnszone]
     }
+    github = {
+      source  = "integrations/github"
+      version = ">= 6.3.0"
+    }
   }
 }
-
 provider "github" {
-  alias   = "module"
-  source  = "integrations/github"
-  version = ">= 6.3.0"
-  token   = var.gh_token
-  owner   = "hmcts"
+  token = var.gh_token
+  owner = "hmcts"
+
 }
+
