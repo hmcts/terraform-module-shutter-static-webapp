@@ -16,6 +16,7 @@ terraform {
 
 provider "github" {
   token = var.gh_token
+  source = "integrations/github"   # 
   owner = "hmcts"
   alias = "module"
 
