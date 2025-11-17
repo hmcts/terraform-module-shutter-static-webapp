@@ -8,8 +8,9 @@ terraform {
       configuration_aliases = [azurerm.dnszone]
     }
     github = {
-      source  = "integrations/github"
-      version = ">= 6.0.0"
+      source  = "hashicorp/github"
+      version =  ">=6.8.2" 
+      #">= 6.0.0"
     }
   }
 }
