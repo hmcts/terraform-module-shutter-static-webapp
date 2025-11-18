@@ -10,12 +10,15 @@ terraform {
     github = {
       source  = "integrations/github"
       version = "~> 6.0"
+      # ">=6.8.2"  
     }
   }
 }
+
 provider "github" {
   token = var.gh_token
   owner = "hmcts"
+ # alias = "module"
 
 }
 
