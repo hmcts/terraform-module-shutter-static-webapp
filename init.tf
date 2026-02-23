@@ -1,6 +1,6 @@
 terraform {
-  required_version = "1.13.3"
-  
+  required_version = ">= 1.13.3"
+
   required_providers {
     azurerm = {
       source                = "hashicorp/azurerm"
@@ -18,7 +18,7 @@ terraform {
 provider "github" {
   token = var.gh_token
   owner = "hmcts"
- # alias = "module"
+  # alias = "module"
 
 }
 
